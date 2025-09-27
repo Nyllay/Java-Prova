@@ -1,4 +1,4 @@
-package prova.primeira.atvum;
+package prova.questões.atvum;
 
 public class MockTest {
     public static void main(String[] args) {

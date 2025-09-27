@@ -1,4 +1,4 @@
-package prova.primeira.atvum;
+package prova.questões.atvum;
 
 import java.util.*;
 

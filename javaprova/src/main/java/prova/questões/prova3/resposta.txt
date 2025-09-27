@@ -1,0 +1,154 @@
+1. Particionamento por Equivalência
+
+Nome (2–50, apenas letras e espaços)
+
+Válidas:
+2 a 50 caracteres, apenas letras/espaços (ex: "Ana", "Maria da Silva")
+
+Inválidas:
+< 2 caracteres
+50 caracteres
+Contendo números ou caracteres especiais (ex: "João1", "Ana@")
+----------------------------------------------------------------------------------------
+Email
+
+Válidas:
+Contém @ e domínio (ex: teste@abc.com)
+
+Inválidas:
+Sem @
+Sem domínio (ex: teste@)
+Apenas texto simples (ex: "teste")
+-------------------------------------------------------------
+Idade (18–120 anos)
+
+Válidas:
+18 a 120 (ex: 25, 100)
+
+Inválidas:
+< 18
+120
+Não numérico (ex: "abc")
+---------------------------------------------------------------
+Senha (8–20, 1 maiúscula, 1 minúscula, 1 número)
+
+Válidas:
+Entre 8 e 20 caracteres, contendo pelo menos 1 maiúscula, 1 minúscula e 1 número (ex: "Teste123")
+
+Inválidas:
+< 8 caracteres
+20 caracteres
+Sem número (ex: "SenhaTeste")
+Sem maiúscula (ex: "senha123")
+Sem minúscula (ex: "SENHA123")
+------------------------------------------------------------------------------------------------
+2. Análise de Valores Limite
+
+Nome: 1 (inválido), 2 (válido), 50 (válido), 51 (inválido)
+
+Idade: 17 (inválido), 18 (válido), 120 (válido), 121 (inválido)
+
+Senha (tamanho): 7 (inválido), 8 (válido), 20 (válido), 21 (inválido)
+__________________________________________________________________________________
+
+Caso  | Nome Válido	 |  Email Válido    |    Idade Válida  |  Senha Válida	 |   Resultado Esperado
+1	  |  Sim	     |       Sim	    |       Sim	       |     Sim	     |       Válido
+2	  |  Sim	     |       Sim	    |       Sim	       |     Não	     |       Inválido
+3	  |  Sim	     |       Sim	    |       Não	       |     Sim	     |       Inválido
+4	  |  Sim	     |       Sim        | 	    Não	       |     Não	     |       Inválido
+5	  |  Sim	     |       Não	    |       Sim	       |     Sim	     |       Inválido
+6	  |  Sim	     |       Não        | 	    Sim	       |     Não	     |       Inválido
+7	  |  Sim	     |       Não	    |       Não	       |     Sim	     |       Inválido
+8	  |  Sim         |	     Não	    |       Não	       |     Não	     |       Inválido
+9	  |  Não         |	     Sim	    |       Sim        |     Sim	     |       Inválido
+10	  |  Não	     |       Sim	    |       Sim	       |     Não	     |       Inválido
+11	  |  Não	     |       Sim	    |       Não	       |     Sim	     |       Inválido
+12	  |  Não         |	     Sim        |	    Não	       |     Não         |       Inválido
+13	  |  Não         |	     Não	    |       Sim	       |     Sim	     |       Inválido
+14	  |  Não	     |       Não	    |       Não	       |     Sim	     |       Inválido
+16	  |  Não	     |       Não	    |       Não	       |     Não	     |       Inválido
+
+4.Casos de teste Caso 1: 
+Todos os campos válidos
+Entrada: Nome="Maria Silva", Email="maria@gmail.com", Idade=25, Senha="Senha123"
+
+Técnica: Particionamento (Classes Válidas)
+
+Resultado Esperado:  Válido
+
+Caso 2: Nome no limite inferior
+Entrada: Nome="Jo", Email="jo@gmail.com", Idade=30, Senha="Senha123"
+
+Técnica: Valor Limite (2 caracteres)
+
+Resultado Esperado:  Válido
+
+Caso 3: Nome no limite superior
+Entrada: Nome="J".repeat(50), Email="j@gmail.com", Idade=30, Senha="Senha123"
+
+Técnica: Valor Limite (50 caracteres)
+
+Resultado Esperado:  Válido
+
+Caso 4: Nome inválido (curto)
+Entrada: Nome="A", Email="a@gmail.com", Idade=30, Senha="Senha123"
+
+Técnica: Valor Limite (1 caractere)
+
+Resultado Esperado:  Inválido
+
+Caso 5: Nome inválido (caracteres especiais)
+Entrada: Nome="João@123", Email="joao@gmail.com", Idade=30, Senha="Senha123"
+
+Técnica: Particionamento (Classe Inválida)
+
+Resultado Esperado:  Inválido
+
+Caso 6: Email inválido (sem @)
+Entrada: Nome="João Silva", Email="joaogmail.com", Idade=30, Senha="Senha123"
+
+Técnica: Particionamento (Classe Inválida)
+
+Resultado Esperado:  Inválido
+
+Caso 7: Idade no limite inferior
+Entrada: Nome="João", Email="joao@gmail.com", Idade=18, Senha="Senha123"
+
+Técnica: Valor Limite (18 anos)
+
+Resultado Esperado:  Válido
+
+Caso 8: Idade inválida (abaixo do limite)
+Entrada: Nome="João", Email="joao@gmail.com", Idade=17, Senha="Senha123"
+
+Técnica: Valor Limite (17 anos)
+
+Resultado Esperado:  Inválido
+
+Caso 9: Senha no limite inferior
+Entrada: Nome="João", Email="joao@gmail.com", Idade=25, Senha="Abc12345"
+
+Técnica: Valor Limite (8 caracteres)
+
+Resultado Esperado:  Válido
+
+Caso 10: Senha inválida (sem maiúscula)
+Entrada: Nome="João", Email="joao@gmail.com", Idade=25, Senha="senha123"
+
+Técnica: Particionamento (Classe Inválida)
+
+Resultado Esperado:  Inválido
+
+Caso 11: Senha inválida (sem número)
+Entrada: Nome="João", Email="joao@gmail.com", Idade=25, Senha="SenhaSegura"
+
+Técnica: Particionamento (Classe Inválida)
+
+Resultado Esperado:  Inválido
+
+Caso 12: Múltiplos campos inválidos
+Entrada: Nome="J", Email="joao", Idade=17, Senha="abc"
+
+Técnica: Tabela de Decisão (Caso 16)
+
+Resultado Esperado:  Inválido
