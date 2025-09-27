@@ -1,0 +1,162 @@
+1. Todos os caminhos possíveis do código são 9 caminhos e elas são:
+Preço inválido (exceção)
+VIP com pouca quantidade
+VIP com quantidade suficiente
+PREMIUM com pouca quantidade
+PREMIUM com quantidade suficiente
+REGULAR com pouca quantidade
+REGULAR com quantidade suficiente
+Outro tipo com pouca quantidade
+Outro tipo com quantidade suficiente
+
+ if (customerType.equals("VIP")) {
+        discount = 0.15;
+    } else if (customerType.equals("PREMIUM")) {
+        discount = 0.10;
+    } else if (customerType.equals("REGULAR")) {
+        discount = 0.05;
+    }
+    
+    if (discount > 0.25) {
+        discount = 0.25; // Desconto máximo de 25%
+    }
+
+
+
+    2. Casos de teste para 100% de cobertura de branch:
+
+Teste 1 - Preço Inválido
+Entrada: price = 0.0, customerType = "VIP", quantity = 5
+
+Saída Esperada: IllegalArgumentException com mensagem "Preço deve ser positivo"
+
+Cobertura: Branch price <= 0 → true
+-------------------------------------------------------------------------------------
+Teste 2 - Cliente VIP com Quantidade Baixa
+Entrada: price = 100.0, customerType = "VIP", quantity = 5
+
+Saída Esperada: 100.0 × 0.15 = 15.0
+
+Cobertura:
+
+price <= 0 → false
+
+customerType.equals("VIP") → true
+
+quantity >= 10 → false
+---------------------------------------------------------------------------------------
+Teste 3 - Cliente VIP com Quantidade Alta
+Entrada: price = 100.0, customerType = "VIP", quantity = 15
+
+Saída Esperada: 100.0 × (0.15 + 0.05) = 20.0
+
+Cobertura:
+
+price <= 0 → false
+
+customerType.equals("VIP") → true
+
+quantity >= 10 → true
+-------------------------------------------------------------------------------------------
+Teste 4 - Cliente PREMIUM com Quantidade Baixa
+Entrada: price = 100.0, customerType = "PREMIUM", quantity = 5
+
+Saída Esperada: 100.0 × 0.10 = 10.0
+
+Cobertura:
+
+price <= 0 → false
+
+customerType.equals("VIP") → false
+
+customerType.equals("PREMIUM") → true
+
+quantity >= 10 → false
+----------------------------------------------------------------------------------------------
+Teste 5 - Cliente PREMIUM com Quantidade Alta
+Entrada: price = 100.0, customerType = "PREMIUM", quantity = 12
+
+Saída Esperada: 100.0 × (0.10 + 0.05) = 15.0
+
+Cobertura:
+
+price <= 0 → false
+
+customerType.equals("VIP") → false
+
+customerType.equals("PREMIUM") → true
+
+quantity >= 10 → true
+-------------------------------------------------------------------------------------------
+Teste 6 - Cliente REGULAR com Quantidade Baixa
+Entrada: price = 100.0, customerType = "REGULAR", quantity = 3
+
+Saída Esperada: 100.0 × 0.05 = 5.0
+
+Cobertura:
+
+price <= 0 → false
+
+customerType.equals("VIP") → false
+
+customerType.equals("PREMIUM") → false
+
+customerType.equals("REGULAR") → true
+
+quantity >= 10 → false
+---------------------------------------------------------------------------------------------
+Teste 7 - Cliente REGULAR com Quantidade Alta
+Entrada: price = 100.0, customerType = "REGULAR", quantity = 20
+
+Saída Esperada: 100.0 × (0.05 + 0.05) = 10.0
+
+Cobertura:
+
+price <= 0 → false
+
+customerType.equals("VIP") → false
+
+customerType.equals("PREMIUM") → false
+
+customerType.equals("REGULAR") → true
+
+quantity >= 10 → true
+-----------------------------------------------------------------------------------------------
+Teste 8 - Cliente Outro com Quantidade Baixa
+Entrada: price = 100.0, customerType = "NORMAL", quantity = 2
+
+Saída Esperada: 100.0 × 0.0 = 0.0
+
+Cobertura:
+
+price <= 0 → false
+
+customerType.equals("VIP") → false
+
+customerType.equals("PREMIUM") → false
+
+customerType.equals("REGULAR") → false
+
+quantity >= 10 → false
+-----------------------------------------------------------------------------------------------
+Teste 9 - Cliente Outro com Quantidade Alta
+Entrada: price = 100.0, customerType = "NORMAL", quantity = 25
+
+Saída Esperada: 100.0 × 0.05 = 5.0
+
+Cobertura:
+
+price <= 0 → false
+
+customerType.equals("VIP") → false
+
+customerType.equals("PREMIUM") → false
+
+customerType.equals("REGULAR") → false
+
+quantity >= 10 → true
+-------------------------------------------------------------------------------------------------
+
+3. Justificativa
+Por que fiz 9 teste? Porue cada teste cobre uma combinação única de condições,
+garantindo que todas as decisões lógicas do código sejam exercitadas pelo menos uma vez.
